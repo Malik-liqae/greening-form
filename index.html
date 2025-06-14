@@ -109,6 +109,20 @@
       transform: scale(1.02);
     }
 
+    #success-message {
+      display: none;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green-dark);
+      background: #c8e6c9;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin-top: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
     @media screen and (max-width: 600px) {
       .form-wrapper {
         padding: 25px 20px;
@@ -126,7 +140,7 @@
 </head>
 <body>
 
-  <div class="form-wrapper">
+  <div class="form-wrapper" id="formContainer">
     <form id="registrationForm">
       <h2>🌱 Greening Registration</h2>
 
@@ -184,10 +198,17 @@
     </form>
   </div>
 
+  <div id="success-message">🎉 Thank you! You are registered to Greening.</div>
+
   <script>
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      alert("🎉 Thank you! You are registered to Greening.");
+
+      // Hide the form
+      document.getElementById("formContainer").style.display = "none";
+
+      // Show success message
+      document.getElementById("success-message").style.display = "block";
     });
   </script>
 
