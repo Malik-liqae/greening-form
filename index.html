@@ -109,10 +109,6 @@
       transform: scale(1.02);
     }
 
-    #qrSection {
-      text-align: center;
-    }
-
     @media screen and (max-width: 600px) {
       .form-wrapper {
         padding: 25px 20px;
@@ -188,27 +184,7 @@
     </form>
   </div>
 
-  <!-- QR Code Section
-  <div id="qrSection">
-    <h3>📲 Scan to open this registration form</h3>
-    <canvas id="qrCanvas"></canvas>
-  </div> -->
-
-  <!-- QRCode.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
   <script>
-    const formURL = "https://yourdomain.com/form.html"; // ⬅️ CHANGE THIS TO YOUR FORM URL
-
-    QRCode.toCanvas(document.getElementById("qrCanvas"), formURL, {
-      width: 180,
-      color: {
-        dark: "#2e7d32",
-        light: "#ffffff"
-      }
-    }, function (error) {
-      if (error) console.error(error);
-    });
-
     document.getElementById("registrationForm").addEventListener("submit", function(e) {
       e.preventDefault();
       alert("🎉 Thank you! You are registered to Greening.");
