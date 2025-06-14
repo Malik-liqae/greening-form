@@ -1,0 +1,28 @@
+[
+  {
+    "name": "liqae",
+    "email": "malikliqae23@gmail.com",
+    "phone": "03302833331",
+    "dob": "2002-01-10",
+    "gender": "Male",
+    "address": "abc",
+    "city": "lahore",
+    "state": "punjab",
+    "country": "palistn",
+    "voucher": "334",
+    "registeredAt": "2025-06-14T12:48:35.033Z"
+  },
+  {
+    "name": "liqae",
+    "email": "malikliqae23@gmail.com",
+    "phone": "03302833331",
+    "dob": "2002-01-10",
+    "gender": "Male",
+    "address": "abc",
+    "city": "lahore",
+    "state": "punjab",
+    "country": "palistn",
+    "voucher": "335",
+    "registeredAt": "2025-06-14T12:49:51.847Z"
+  }
+]

@@ -1,9 +1,10 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Greening Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +14,13 @@
       --green-bg: #e6f5ec;
       --text-dark: #1b5e20;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--green-bg);
@@ -23,6 +30,7 @@
       align-items: center;
       padding: 20px;
     }
+
     .form-wrapper {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
@@ -34,20 +42,31 @@
       animation: slideIn 0.5s ease-in-out;
       margin-bottom: 30px;
     }
+
     @keyframes slideIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     h2 {
       text-align: center;
       color: var(--green-dark);
       font-size: 26px;
       margin-bottom: 25px;
     }
+
     .form-group {
       position: relative;
       margin-bottom: 20px;
     }
+
     .form-group input,
     .form-group select {
       width: 100%;
@@ -59,6 +78,7 @@
       background: transparent;
       color: #1b5e20;
     }
+
     .form-group label {
       position: absolute;
       top: 50%;
@@ -70,14 +90,16 @@
       transition: all 0.2s ease;
       pointer-events: none;
     }
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group select:focus + label,
-    .form-group select:valid + label {
+
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label,
+    .form-group select:focus+label,
+    .form-group select:valid+label {
       top: -10px;
       font-size: 12px;
       color: var(--green-dark);
     }
+
     button {
       width: 100%;
       padding: 14px;
@@ -90,10 +112,12 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
+
     button:hover {
       background: var(--green-light);
       transform: scale(1.02);
     }
+
     #success-message {
       display: none;
       color: #2e7d32;
@@ -106,6 +130,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="form-wrapper" id="formContainer">
     <form id="registrationForm">
@@ -173,7 +198,7 @@
   <div id="success-message"></div>
 
   <script>
-    document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+    document.getElementById("registrationForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = {
         name: document.getElementById("name").value,
@@ -188,7 +213,7 @@
         voucher: document.getElementById("voucher").value
       };
 
-      const response = await fetch("https://your-backend.com/register", {
+      const response = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -206,4 +231,5 @@
     });
   </script>
 </body>
+
 </html>
