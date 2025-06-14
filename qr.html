@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Greening Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #2e7d32;
+      --green-light: #66bb6a;
+      --green-bg: #e6f5ec;
+      --text-dark: #1b5e20;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--green-bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .form-wrapper {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 35px 30px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      animation: slideIn 0.5s ease-in-out;
+      margin-bottom: 30px;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--green-dark);
+      font-size: 26px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 12px;
+      font-size: 14px;
+      border: 1px solid #c8e6c9;
+      border-radius: 12px;
+      outline: none;
+      background: transparent;
+      color: #1b5e20;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 0 6px;
+      color: #4caf50;
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group select:focus + label,
+    .form-group select:valid + label {
+      top: -10px;
+      font-size: 12px;
+      color: var(--green-dark);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--green-dark);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--green-light);
+      transform: scale(1.02);
+    }
+
+    #qrSection {
+      text-align: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      .form-wrapper {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      button {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <form id="registrationForm">
+      <h2>🌱 Greening Registration</h2>
+
+      <div class="form-group">
+        <input type="text" name="name" id="name" required placeholder=" " />
+        <label for="name">Full Name</label>
+      </div>
+
+      <div class="form-group">
+        <input type="email" name="email" id="email" required placeholder=" " />
+        <label for="email">Email Address</label>
+      </div>
+
+      <div class="form-group">
+        <input type="tel" name="phone" id="phone" required placeholder=" " />
+        <label for="phone">Phone Number</label>
+      </div>
+
+      <div class="form-group">
+        <input type="date" name="dob" id="dob" required placeholder=" " />
+        <label for="dob">Date of Birth</label>
+      </div>
+
+      <div class="form-group">
+        <select name="gender" id="gender" required>
+          <option value="" disabled selected hidden></option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <label for="gender">Gender</label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="address" id="address" required placeholder=" " />
+        <label for="address">Address</label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="city" id="city" required placeholder=" " />
+        <label for="city">City</label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="state" id="state" required placeholder=" " />
+        <label for="state">State</label>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="country" id="country" required placeholder=" " />
+        <label for="country">Country</label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- QR Code Section -->
+  <div id="qrSection">
+    <h3>📲 Scan to open this registration form</h3>
+    <canvas id="qrCanvas"></canvas>
+  </div>
+
+  <!-- QRCode.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <script>
+    const formURL = "https://yourdomain.com/form.html"; // ⬅️ CHANGE THIS TO YOUR FORM URL
+
+    QRCode.toCanvas(document.getElementById("qrCanvas"), formURL, {
+      width: 180,
+      color: {
+        dark: "#2e7d32",
+        light: "#ffffff"
+      }
+    }, function (error) {
+      if (error) console.error(error);
+    });
+
+    document.getElementById("registrationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("🎉 Thank you! You are registered to Greening.");
+    });
+  </script>
+
+</body>
+</html>
