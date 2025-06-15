@@ -1,4 +1,3 @@
-
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
@@ -13,7 +12,13 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname)); // Serve static files like index.html
 
-// Load registrations or create file
+// 📥 Log each incoming request
+app.use((req, res, next) => {
+  console.log(`📥 ${new Date().toLocaleString()} | ${req.ip} → ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// 📂 Load registrations or create file
 function loadRegistrations() {
   try {
     if (!fs.existsSync(DATA_FILE)) {
@@ -27,17 +32,17 @@ function loadRegistrations() {
   }
 }
 
-// Save to registrations.json
+// 💾 Save to registrations.json
 function saveRegistrations(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// Serve the form
+// 🌐 Serve the form
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Handle form POST
+// ✅ Handle form submission
 app.post('/register', (req, res) => {
   const { name, email, phone, dob, gender, address, city, state, country, voucher } = req.body;
 
