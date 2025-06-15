@@ -8,81 +8,54 @@ const app = express();
 const PORT = 3000;
 const DATA_FILE = path.join(__dirname, 'registrations.json');
 
-app.use(cors()); // Allow requests from any origin
-app.use(bodyParser.json()); // Parse incoming JSON bodies
+app.use(cors());
+app.use(bodyParser.json());
 
-// Helper: Load existing registrations or create an empty JSON file
+// Ensure JSON file exists
 function loadRegistrations() {
   try {
-    if (!fs.existsSync(DATA_FILE)) {
-      fs.writeFileSync(DATA_FILE, JSON.stringify([]));
-    }
-
+    if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, JSON.stringify([]));
     const content = fs.readFileSync(DATA_FILE, 'utf8');
     return content.trim() === '' ? [] : JSON.parse(content);
   } catch (err) {
-    console.error("❌ Error reading or parsing registrations.json:", err);
+    console.error("❌ Error reading/parsing JSON:", err);
     return [];
   }
 }
 
-
-// Helper: Save updated registrations to the file
 function saveRegistrations(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// POST endpoint to handle registration
+// Handle POST /register
 app.post('/register', (req, res) => {
-  const {
-    name,
-    email,
-    phone,
-    dob,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    voucher
-  } = req.body;
+  const { name, email, phone, dob, gender, address, city, state, country, voucher } = req.body;
 
-  // Basic validation
-  if (!voucher || !name || !email) {
+  console.log(`📥 Registration received from: ${name} (${email}) at ${new Date().toLocaleString()}`);
+
+  if (!name || !email || !voucher) {
     return res.status(400).json({ message: 'Name, Email, and Voucher are required.' });
   }
 
   const registrations = loadRegistrations();
+  const duplicate = registrations.find(r => r.voucher === voucher);
 
-  // Check if voucher is already used
-  const alreadyUsed = registrations.find(entry => entry.voucher === voucher);
-  if (alreadyUsed) {
+  if (duplicate) {
+    console.log(`⚠️ Duplicate voucher: ${voucher}`);
     return res.status(409).json({ message: '❌ This voucher has already been used.' });
   }
 
-  // Create and save new registration
-  const newEntry = {
-    name,
-    email,
-    phone,
-    dob,
-    gender,
-    address,
-    city,
-    state,
-    country,
-    voucher,
+  registrations.push({
+    name, email, phone, dob, gender, address, city, state, country, voucher,
     registeredAt: new Date().toISOString()
-  };
+  });
 
-  registrations.push(newEntry);
   saveRegistrations(registrations);
 
-  // Respond success
+  console.log(`✅ Registered successfully: ${name} - Voucher: ${voucher}`);
   res.status(200).json({ message: '✅ Registration successful' });
 });
 
-// Start the server
-app.listen(PORT, '0.0.0.0', () =>{
-  console.log(`✅ Server is running at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

@@ -1,235 +1,105 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Greening Registration</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
   <style>
-    :root {
-      --green-dark: #2e7d32;
-      --green-light: #66bb6a;
-      --green-bg: #e6f5ec;
-      --text-dark: #1b5e20;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--green-bg);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: Arial, sans-serif;
+      background-color: #e6f5e6;
       padding: 20px;
     }
-
-    .form-wrapper {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 35px 30px;
-      width: 100%;
-      max-width: 520px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      animation: slideIn 0.5s ease-in-out;
-      margin-bottom: 30px;
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     h2 {
       text-align: center;
-      color: var(--green-dark);
-      font-size: 26px;
-      margin-bottom: 25px;
-    }
-
-    .form-group {
-      position: relative;
       margin-bottom: 20px;
+      color: #2e7d32;
     }
-
-    .form-group input,
-    .form-group select {
+    input, select {
       width: 100%;
-      padding: 14px 12px;
-      font-size: 14px;
-      border: 1px solid #c8e6c9;
-      border-radius: 12px;
-      outline: none;
-      background: transparent;
-      color: #1b5e20;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
-
-    .form-group label {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.8);
-      padding: 0 6px;
-      color: #4caf50;
-      transition: all 0.2s ease;
-      pointer-events: none;
-    }
-
-    .form-group input:focus+label,
-    .form-group input:not(:placeholder-shown)+label,
-    .form-group select:focus+label,
-    .form-group select:valid+label {
-      top: -10px;
-      font-size: 12px;
-      color: var(--green-dark);
-    }
-
     button {
       width: 100%;
-      padding: 14px;
-      background: var(--green-dark);
-      border: none;
+      padding: 12px;
+      background-color: #2e7d32;
       color: white;
-      font-weight: 600;
+      border: none;
+      border-radius: 6px;
       font-size: 16px;
-      border-radius: 14px;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
-
     button:hover {
-      background: var(--green-light);
-      transform: scale(1.02);
+      background-color: #27642b;
     }
-
-    #success-message {
-      display: none;
-      color: #2e7d32;
-      text-align: center;
-      font-size: 20px;
-      padding: 20px;
-      background: #e8f5e9;
-      border-radius: 12px;
-      max-width: 520px;
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="form-wrapper" id="formContainer">
+  <div class="container">
+    <h2>Event Registration</h2>
     <form id="registrationForm">
-      <h2>🌱 Greening Registration</h2>
-
-      <div class="form-group">
-        <input type="text" name="name" id="name" required placeholder=" " />
-        <label for="name">Full Name</label>
-      </div>
-
-      <div class="form-group">
-        <input type="email" name="email" id="email" required placeholder=" " />
-        <label for="email">Email Address</label>
-      </div>
-
-      <div class="form-group">
-        <input type="tel" name="phone" id="phone" required placeholder=" " />
-        <label for="phone">Phone Number</label>
-      </div>
-
-      <div class="form-group">
-        <input type="date" name="dob" id="dob" required placeholder=" " />
-        <label for="dob">Date of Birth</label>
-      </div>
-
-      <div class="form-group">
-        <select name="gender" id="gender" required>
-          <option value="" disabled selected hidden></option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-        <label for="gender">Gender</label>
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="address" id="address" required placeholder=" " />
-        <label for="address">Address</label>
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="city" id="city" required placeholder=" " />
-        <label for="city">City</label>
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="state" id="state" required placeholder=" " />
-        <label for="state">State</label>
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="country" id="country" required placeholder=" " />
-        <label for="country">Country</label>
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="voucher" id="voucher" required placeholder=" " />
-        <label for="voucher">Voucher Number</label>
-      </div>
-
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="phone" placeholder="Phone Number" />
+      <input type="date" name="dob" placeholder="Date of Birth" />
+      <select name="gender">
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <input type="text" name="address" placeholder="Address" />
+      <input type="text" name="city" placeholder="City" />
+      <input type="text" name="state" placeholder="State" />
+      <input type="text" name="country" placeholder="Country" />
+      <input type="text" name="voucher" placeholder="Voucher Code" required />
       <button type="submit">Register</button>
     </form>
   </div>
 
-  <div id="success-message"></div>
-
   <script>
-    document.getElementById("registrationForm").addEventListener("submit", async function (e) {
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        dob: document.getElementById("dob").value,
-        gender: document.getElementById("gender").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        state: document.getElementById("state").value,
-        country: document.getElementById("country").value,
-        voucher: document.getElementById("voucher").value
-      };
 
-      const response = await fetch("http://192.168.100.43:3000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
 
-      const result = await response.json();
+      try {
+        const response = await fetch("http://192.168.100.43:3000/register", { // ← change IP!
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
 
-      if (response.ok) {
-        document.getElementById("formContainer").style.display = "none";
-        document.getElementById("success-message").innerHTML = `🎉 Thank you, ${formData.name}!<br>Your Voucher <strong>${formData.voucher}</strong> is now used.`;
-        document.getElementById("success-message").style.display = "block";
-      } else {
-        alert(result.message || "❌ This voucher has already been used.");
+        const result = await response.json();
+        if (response.ok) {
+          alert(result.message);
+          form.reset();
+        } else {
+          alert(result.message || "Something went wrong.");
+        }
+      } catch (error) {
+        alert("❌ Could not connect to server. Is it running?");
+        console.error(error);
       }
     });
   </script>
 </body>
-
 </html>
