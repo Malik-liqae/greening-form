@@ -50,5 +50,18 @@
     "country": "palistn",
     "voucher": "123",
     "registeredAt": "2025-06-15T18:19:08.096Z"
+  },
+  {
+    "name": "Malik Liqae",
+    "email": "ezaanmalik911@gmail.com",
+    "phone": "03277393094",
+    "dob": "2025-06-11",
+    "gender": "Male",
+    "address": "Aslam Park Lahore",
+    "city": "Lahore",
+    "state": "Punjab",
+    "country": "Pakistan",
+    "voucher": "338",
+    "registeredAt": "2025-06-15T18:32:56.008Z"
   }
 ]

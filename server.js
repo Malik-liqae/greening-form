@@ -1,3 +1,4 @@
+
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
@@ -10,52 +11,58 @@ const DATA_FILE = path.join(__dirname, 'registrations.json');
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(__dirname)); // Serve static files like index.html
 
-// Ensure JSON file exists
+// Load registrations or create file
 function loadRegistrations() {
   try {
-    if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+    if (!fs.existsSync(DATA_FILE)) {
+      fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+    }
     const content = fs.readFileSync(DATA_FILE, 'utf8');
     return content.trim() === '' ? [] : JSON.parse(content);
   } catch (err) {
-    console.error("❌ Error reading/parsing JSON:", err);
+    console.error("❌ Error reading/parsing registrations.json:", err);
     return [];
   }
 }
 
+// Save to registrations.json
 function saveRegistrations(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// Handle POST /register
+// Serve the form
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Handle form POST
 app.post('/register', (req, res) => {
   const { name, email, phone, dob, gender, address, city, state, country, voucher } = req.body;
 
-  console.log(`📥 Registration received from: ${name} (${email}) at ${new Date().toLocaleString()}`);
-
-  if (!name || !email || !voucher) {
+  if (!voucher || !name || !email) {
     return res.status(400).json({ message: 'Name, Email, and Voucher are required.' });
   }
 
   const registrations = loadRegistrations();
-  const duplicate = registrations.find(r => r.voucher === voucher);
 
-  if (duplicate) {
-    console.log(`⚠️ Duplicate voucher: ${voucher}`);
+  const alreadyUsed = registrations.find(entry => entry.voucher === voucher);
+  if (alreadyUsed) {
     return res.status(409).json({ message: '❌ This voucher has already been used.' });
   }
 
-  registrations.push({
+  const newEntry = {
     name, email, phone, dob, gender, address, city, state, country, voucher,
     registeredAt: new Date().toISOString()
-  });
+  };
 
+  registrations.push(newEntry);
   saveRegistrations(registrations);
 
-  console.log(`✅ Registered successfully: ${name} - Voucher: ${voucher}`);
   res.status(200).json({ message: '✅ Registration successful' });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server is running at http://localhost:${PORT}`);
 });
