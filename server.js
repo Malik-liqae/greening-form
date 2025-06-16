@@ -10,7 +10,7 @@ const DATA_FILE = path.join(__dirname, 'registrations.json');
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname)); // Serve static files like index.html
+app.use(express.static(__dirname)); // Serve index.html and other static files
 
 // 📥 Log each incoming request
 app.use((req, res, next) => {
@@ -37,7 +37,7 @@ function saveRegistrations(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// 🌐 Serve the form
+// 🌐 Serve the registration form
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -77,7 +77,19 @@ app.post('/register', (req, res) => {
   res.status(200).json({ message: '✅ Registration successful' });
 });
 
+// 🩺 Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: '✅ Server is healthy' });
+});
+
+// 🔐 View all registrations (no password protection)
+app.get('/registrations', (req, res) => {
+  const registrations = loadRegistrations();
+  res.json(registrations);
+});
+
 // 🟢 Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running at http://localhost:${PORT}`);
+  console.log('🌍 Accessible from other devices on same network or via ngrok.');
 });
