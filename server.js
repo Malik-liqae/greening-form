@@ -58,7 +58,16 @@ app.post('/register', (req, res) => {
   }
 
   const newEntry = {
-    name, email, phone, dob, gender, address, city, state, country, voucher,
+    name,
+    email,
+    phone,
+    dob,
+    gender,
+    address,
+    city,
+    state,
+    country,
+    voucher,
     registeredAt: new Date().toISOString()
   };
 
@@ -68,6 +77,7 @@ app.post('/register', (req, res) => {
   res.status(200).json({ message: '✅ Registration successful' });
 });
 
+// 🟢 Start the server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server is running at http://localhost:${PORT}`);
 });

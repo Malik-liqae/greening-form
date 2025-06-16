@@ -3,72 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registration Form</title>
+  <title>Event Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #e6f5e6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #d4f4dd, #b0eacb, #c3f3da, #e6f5e6);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      margin: 0;
       padding: 20px;
     }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+      background-color: #ffffffd9;
+      padding: 35px 30px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease;
+    }
+
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      color: #2e7d32;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 14px 0;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
       color: #2e7d32;
     }
+
     input, select {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+      padding: 12px 12px 12px 38px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
+
+    input:focus, select:focus {
+      border-color: #2e7d32;
+      box-shadow: 0 0 6px rgba(46, 125, 50, 0.3);
+      outline: none;
+    }
+
     button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background-color: #2e7d32;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
     }
+
     button:hover {
       background-color: #27642b;
     }
+
     @media (max-width: 600px) {
-      .container { padding: 20px; }
+      .container { padding: 25px 20px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Event Registration</h2>
+    <h2><i class="fa-solid fa-leaf"></i> Event Registration</h2>
     <form id="registrationForm">
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="text" name="phone" placeholder="Phone Number" />
-      <input type="date" name="dob" placeholder="Date of Birth" />
-      <select name="gender">
-        <option value="">Select Gender</option>
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select>
-      <input type="text" name="address" placeholder="Address" />
-      <input type="text" name="city" placeholder="City" />
-      <input type="text" name="state" placeholder="State" />
-      <input type="text" name="country" placeholder="Country" />
-      <input type="text" name="voucher" placeholder="Voucher Code" required />
-      <button type="submit">Register</button>
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" name="name" placeholder="Full Name" required />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email" required />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-phone"></i>
+        <input type="text" name="phone" placeholder="Phone Number" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-calendar"></i>
+        <input type="date" name="dob" placeholder="Date of Birth" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-venus-mars"></i>
+        <select name="gender">
+          <option value="">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-map-marker-alt"></i>
+        <input type="text" name="address" placeholder="Address" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-city"></i>
+        <input type="text" name="city" placeholder="City" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-flag"></i>
+        <input type="text" name="state" placeholder="State" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-globe"></i>
+        <input type="text" name="country" placeholder="Country" />
+      </div>
+      <div class="input-group">
+        <i class="fa fa-ticket-alt"></i>
+        <input type="text" name="voucher" placeholder="Voucher Code" required />
+      </div>
+      <button type="submit"><i class="fa fa-paper-plane"></i> Register</button>
     </form>
   </div>
 
@@ -77,12 +151,11 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch("http://192.168.100.43:3000/register", { // ← change IP!
+        const response = await fetch("http://192.168.1.110:3000/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
